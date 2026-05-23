@@ -13,6 +13,19 @@ class Solution:
         # This prevents infinite loops and ensures we don't duplicate nodes.
         self.map = {}
 
+        # you can use nonlocal in parent to achieve same thing, ask ai for details
+        # since dictionaries are mutable, the keyword nonlocal is not necessary
+
+        # Persistent "State" (The Hash Map)
+        # This is the architectural reason. The algorithm requires a dictionary (self.map) to keep track of visited nodes across multiple recursive calls.
+        # By defining self.map = {} inside __init__, that dictionary becomes tied directly to the object instance.
+        # With a Class: The hash map lives cleanly on the object (self). The function can easily read and write to it across recursive cycles without messing up other instances of Solution.
+        # Without a Class (Option 2): You are forced to pass the dictionary through every single recursive call function signature (memo_map=None), or resort to using risky global variables which can bleed data between separate tests.
+
+        # If you see class Solution:, use self. (nonlocal will not work here to share data across separate class methods).
+
+        # If you see a function inside a function (with no class layout), use nonlocal (or direct mutation). self has absolutely no meaning here and will cause an error because there is no object instance.
+
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
         # Base Case: If the current node is null, there is nothing to copy.
         if head is None:
