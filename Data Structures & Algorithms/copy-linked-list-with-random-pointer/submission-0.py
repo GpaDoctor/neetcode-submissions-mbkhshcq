@@ -34,6 +34,7 @@ class Solution:
             
         # Memoization check: If we have already created a deep copy of this node 
         # during a previous recursive call, return that existing copy.
+        # HERE IS THE CHECKING LINE!
         if head in self.map:
             return self.map[head]
 
