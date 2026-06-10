@@ -1,5 +1,4 @@
 from typing import List
-
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
         # Step 1: Find the pivot (the index of the minimum element).
@@ -15,6 +14,10 @@ class Solution:
                 l = m + 1
             # Otherwise, the middle element is less than or equal to the rightmost element,
             # meaning the right half is properly sorted, and the pivot is at m or to its left.
+            # why r = m. Not r = m - 1.
+            # we are looking for the min element
+            # this is not typical binary search. we didn't compare mid to target
+            # so mid has to be included 
             else:
                 r = m 
 
