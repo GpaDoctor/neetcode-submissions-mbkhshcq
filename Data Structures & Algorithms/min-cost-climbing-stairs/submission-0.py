@@ -1,3 +1,4 @@
+# time exceeded
 # from typing import List
 
 # class Solution:
@@ -25,14 +26,27 @@
 
 class Solution:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
+        # memo array to store the minimum cost calculated from each step 'i'
+        # -1 represents that the subproblem has not been solved yet
         memo = [-1] * len(cost)
 
         def dfs(i):
+            # Base Case: If we reach or pass the top of the floor (beyond the last step),
+            # no more cost is incurred.
             if i >= len(cost):
                 return 0
+            
+            # If the minimum cost from step 'i' has already been computed, 
+            # return the cached result to avoid redundant work.
             if memo[i] != -1:
                 return memo[i]
+            
+            # Recursive Step: The total cost from step 'i' is the cost of the current step 
+            # plus the minimum cost of the next choice (either taking 1 step or 2 steps).
             memo[i] = cost[i] + min(dfs(i + 1), dfs(i + 2))
+            
             return memo[i]
 
+        # Since we can choose to start at either index 0 or index 1,
+        # we return the minimum cost between these two starting points.
         return min(dfs(0), dfs(1))
