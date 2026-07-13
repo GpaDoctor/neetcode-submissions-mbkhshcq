@@ -23,3 +23,4 @@ class Solution:
 
         # Begin the recursion starting at the first house (index 0)
         return dfs(0)
+        
